@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Baloo_Bhai_2 } from "next/font/google";
 import { AsideItem, AsideSubMenu } from "./AsideComponents";
 import {
@@ -14,8 +14,8 @@ import {
   ReportesIcon,
   ConfigIcon,
   SalirIcon,
-  ShaperonIcon,
 } from "@/components/icons/Icons";
+import { CircleEqual } from "lucide-react";
 
 const balooBhai2 = Baloo_Bhai_2({
   weight: ["400", "500", "600", "700"],
@@ -29,12 +29,31 @@ const Sidebar = () => {
     setIsOpen(!isOpen);
   };
 
+  // Cerrar sidebar al hacer clic fuera de él
+  useEffect(() => {
+    const handleOutsideClick = (event: any) => {
+      if (
+        isOpen &&
+        !event.target.closest(".sidebar") &&
+        !event.target.closest(".menu-button")
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("click", handleOutsideClick);
+    return () => {
+      1;
+      document.removeEventListener("click", handleOutsideClick);
+    };
+  }, [isOpen]);
+
   return (
     <>
       <div
-        className={`w-[15%] bg-[#1d4db0] p-6 relative text-white min-h-screen ${
-          isOpen ? "ml-0" : "-ml-[15%]"
-        } md:ml-0 transition-all duration-300`}
+        className={`fixed top-0 left-0 min-h-screen bg-[#1d4db0] p-6 text-white transform ${
+          isOpen ? "translate-x-0" : "-translate-x-full"
+        } md:relative md:translate-x-0 transition-transform duration-300 ease-in-out z-50 sidebar w-[75%] xl:w-[15%] md:w-[20%] overflow-y-auto`}
       >
         <div
           className={`mb-10 flex justify-center text-2xl font-extrabold ${balooBhai2.className}`}
@@ -64,7 +83,6 @@ const Sidebar = () => {
             tituloItem="Pedidos"
             to="/pedidos"
             icon={<PedidosIcon />}
-            //   notificacion="1"
           />
           <AsideItem
             tituloItem="Préstamos"
@@ -139,16 +157,27 @@ const Sidebar = () => {
             ]}
           />
         </div>
-        <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 flex w-1/2 items-center justify-between rounded-xl bg-white text-black px-5 py-2.5">
+        <div
+          className={`absolute bottom-20 left-1/2 transform -translate-x-1/2 flex w-1/2 items-center justify-between rounded-xl bg-white text-black px-5 py-2.5 transition-all duration-300 ${
+            isOpen ? "translate-y-0" : "translate-y-full"
+          }`}
+        >
           <SalirIcon />
           <span>Salir</span>
         </div>
       </div>
+      {/* Overlay */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-black opacity-50 z-40"
+          onClick={toggleSidebar}
+        ></div>
+      )}
       <button
-        className="md:hidden absolute top-4 right-4 text-black<"
+        className="md:hidden fixed top-4 left-4 text-black z-50 menu-button"
         onClick={toggleSidebar}
       >
-        {isOpen ? "Cerrar" : "Abrir"}
+        <CircleEqual className="w-6 h-6" />
       </button>
     </>
   );
