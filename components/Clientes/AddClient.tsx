@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus, Camera, Phone, ImagePlus } from "lucide-react";
 import { useNotifications } from "@/components/ui/notifications";
