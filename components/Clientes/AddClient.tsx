@@ -56,6 +56,7 @@ export const AgregarCliente2: React.FC = () => {
     register,
     handleSubmit,
     setValue,
+    watch,
     formState: { errors },
   } = useForm<AddClientInput>({
     resolver: zodResolver(addClientInputSchema),
@@ -351,14 +352,14 @@ export const AgregarCliente2: React.FC = () => {
                         Zona
                       </Label>
                       <Select
-                        id="zone"
                         className="w-full border border-black rounded-md px-4 py-2 text-center text-sm"
+                        id="zone"
                         {...register("zone")}
-                        options={zones.map((zone: Zone) => ({
+                        onChange={handleZoneChange}
+                        options={zones.map((zone) => ({
                           label: zone.name,
                           value: zone._id,
                         }))}
-                        onChange={handleZoneChange}
                       />
                       {formState.errors.zone && (
                         <span className="error">
@@ -371,16 +372,13 @@ export const AgregarCliente2: React.FC = () => {
                         Distrito
                       </Label>
                       <Select
-                        id="district"
                         className="w-full border border-black rounded-md px-4 py-2 text-center text-sm"
+                        id="district"
                         {...register("district")}
-                        options={filteredDistricts.map(
-                          (district: District) => ({
-                            label: district.name,
-                            value: district._id,
-                          })
-                        )}
-                        // onChange={handleDistrictChange}
+                        options={filteredDistricts.map((district) => ({
+                          label: district.name,
+                          value: district._id,
+                        }))}
                       />
                       {formState.errors.district && (
                         <span className="error">
