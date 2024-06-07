@@ -1,8 +1,6 @@
 import * as React from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
-
 import { cn } from "@/utils/cn";
-
 import { FieldWrapper, FieldWrapperPassThroughProps } from "./field-wrapper";
 
 type Option = {
@@ -29,6 +27,16 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectFieldProps>(
       registration,
       onChange,
     } = props;
+
+    const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+      if (onChange) {
+        onChange(event);
+      }
+      if (registration?.onChange) {
+        registration.onChange(event);
+      }
+    };
+
     return (
       <FieldWrapper label={label} error={error}>
         <select
@@ -39,7 +47,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectFieldProps>(
           defaultValue={defaultValue}
           {...registration}
           ref={ref}
-          onChange={onChange}
+          onChange={handleChange}
         >
           {options.map(({ label, value }) => (
             <option key={label?.toString()} value={value}>

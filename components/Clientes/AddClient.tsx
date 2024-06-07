@@ -99,7 +99,7 @@ export const AgregarCliente2: React.FC = () => {
     }
   };
 
-  const onSubmit = async (data: AddClientInput) => {
+  const onSubmit: SubmitHandler<AddClientInput> = async (data) => {
     console.log("Datos del formulario:", data);
     try {
       setIsLoading(true);
@@ -179,8 +179,8 @@ export const AgregarCliente2: React.FC = () => {
             </ModalTitle>
           </ModalHeader>
           <ModalBody className="overflow-y-auto max-h-[70vh] px-1">
-            <Form
-              onSubmit={handleSubmit(onSubmit)}
+            <Form<AddClientInput, typeof addClientInputSchema>
+              onSubmit={onSubmit}
               schema={addClientInputSchema}
             >
               {({ register, formState }) => (
