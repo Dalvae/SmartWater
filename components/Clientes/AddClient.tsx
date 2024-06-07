@@ -44,12 +44,12 @@ export const AgregarCliente2: React.FC = () => {
   const [isAgency, setIsAgency] = useState(false);
 
   useEffect(() => {
-    const fetchZones = async () => {
+    const fetchZonesData = async () => {
       const zones = await fetchZones();
       setZones(zones);
     };
 
-    fetchZones();
+    fetchZonesData();
   }, [setZones]);
 
   const {
