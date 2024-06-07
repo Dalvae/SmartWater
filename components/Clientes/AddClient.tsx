@@ -114,11 +114,11 @@ export const AgregarCliente2: React.FC = () => {
       const clientData = {
         ...data,
         storeImage: selectedImage,
-        ciFrontImage: imageCarnetDelantero,
-        ciBackImage: imageCarnetTrasero,
+        ciFrontImage: imageCarnetDelantero ?? "",
+        ciBackImage: imageCarnetTrasero ?? "",
         ...(isClient !== undefined && { isClient }),
         ...(isAgency !== undefined && { isAgency }),
-        renewInDays: "10",
+        renewInDays: 10,
       };
 
       await addClient(clientData);
