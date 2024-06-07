@@ -111,7 +111,7 @@ const useAppStore = create<AppState>((set) => ({
 
   // Asignar zonas
   zones: [],
-  setZones: (zones: Zone[]) => set({ zones }),
+  setZones: (zones) => set({ zones }),
   zoneAndDistrictNames: {},
   setZoneAndDistrictNames: (zoneAndDistrictNames) =>
     set({ zoneAndDistrictNames }),
