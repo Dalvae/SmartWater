@@ -10,6 +10,7 @@ export const addClientInputSchema = z
     email: z.string().email("El correo electrónico no es válido").optional(),
     address: z.string().min(4, "La dirección es requerida"),
     comment: z.string().optional(),
+    reference: z.string().optional(),
     ciFrontImage: z
       .string()
       .min(1, "La imagen del carnet (delantero) es requerida"),

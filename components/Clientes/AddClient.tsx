@@ -244,9 +244,9 @@ export const AgregarCliente2: React.FC = () => {
                         id="billingInfo"
                         {...register("billingInfo")}
                       />
-                      {formState.errors.bill && (
+                      {formState.errors.billingInfo && (
                         <span className="error">
-                          {formState.errors.bill.message}
+                          {formState.errors.billingInfo.message}
                         </span>
                       )}
                     </div>
@@ -304,14 +304,13 @@ export const AgregarCliente2: React.FC = () => {
                           placeholder="70918627"
                           id="phoneNumber"
                           {...register("phoneNumber")}
-                          handlezo
                         />
                       </div>
                     </div>
 
-                    {formState.errors.phone && (
+                    {formState.errors.phoneNumber && (
                       <span className="error">
-                        {formState.errors.phone.message}
+                        {formState.errors.phoneNumber.message}
                       </span>
                     )}
                   </div>
@@ -341,7 +340,7 @@ export const AgregarCliente2: React.FC = () => {
                         id="address"
                         {...register("reference")}
                       />
-                      {formState.errors.address && (
+                      {formState.errors.reference && (
                         <span className="reference">
                           {formState.errors.reference.message}
                         </span>
