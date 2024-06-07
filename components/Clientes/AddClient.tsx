@@ -233,13 +233,16 @@ export const AgregarCliente2: React.FC = () => {
                       )}
                     </div>
                     <div>
-                      <Label className="text-sm font-normal" htmlFor="bill">
+                      <Label
+                        className="text-sm font-normal"
+                        htmlFor="billingInfo"
+                      >
                         Datos de facturación
                       </Label>
                       <Input
                         className="w-full border border-black rounded-md px-4 py-2 text-center text-sm"
-                        id="bill"
-                        {...register("bill")}
+                        id="billingInfo"
+                        {...register("billingInfo")}
                       />
                       {formState.errors.bill && (
                         <span className="error">
@@ -250,17 +253,20 @@ export const AgregarCliente2: React.FC = () => {
                   </div>
                   <div className="flex gap-4">
                     <div className="flex-1 flex flex-col gap-1">
-                      <Label className="text-sm font-normal" htmlFor="bill">
+                      <Label
+                        className="text-sm font-normal"
+                        htmlFor="billingInfo.NIT"
+                      >
                         Número de NIT
                       </Label>
                       <Input
                         className="w-full border border-black rounded-md px-4 py-2 text-center text-sm"
-                        id="NIT"
-                        {...register("NIT")}
+                        id="billingInfo.NIT"
+                        {...register("billingInfo.NIT")}
                       />
-                      {formState.errors.NIT && (
+                      {formState.errors.billingInfo?.NIT && (
                         <span className="error">
-                          {formState.errors.NIT.message}
+                          {formState.errors.billingInfo.NIT.message}
                         </span>
                       )}
                     </div>

@@ -25,9 +25,9 @@ export const addClientInputSchema = z
     renewInDays: z.number().min(1, "El período de renovación es requerido"),
     billingInfo: z.object({
       NIT: z.string().nonempty("El NIT es requerido"),
-      phoneNumber: z
-        .string()
-        .min(8, "El número de teléfono de facturación es requerido"),
+      // phoneNumber: z
+      //   .string()
+      //   .min(8, "El número de teléfono de facturación es requerido"),
     }),
     isClient: z.boolean().optional(),
     isAgency: z.boolean().optional(),
