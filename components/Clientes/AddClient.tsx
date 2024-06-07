@@ -179,10 +179,7 @@ export const AgregarCliente2: React.FC = () => {
             </ModalTitle>
           </ModalHeader>
           <ModalBody className="overflow-y-auto max-h-[70vh] px-1">
-            <Form<AddClientInput, typeof addClientInputSchema>
-              onSubmit={onSubmit}
-              schema={addClientInputSchema}
-            >
+            <Form onSubmit={onSubmit} schema={addClientInputSchema}>
               {({ register, formState }) => (
                 <>
                   <div className="flex flex-col items-center gap-6 relative">
