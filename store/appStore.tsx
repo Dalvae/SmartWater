@@ -1,7 +1,8 @@
 // store/appStore.ts
 
 import create from "zustand";
-import { Client } from "../type/Cliente/Client";
+import { Client } from "../types/Cliente/Client";
+import { District, Zone } from "../types/Zones/Zones";
 
 export interface AppState {
   // Estado relacionado con los clientes
@@ -42,13 +43,14 @@ export interface AppState {
   setFilteredClients: (clients: Client[]) => void;
 
   // Estado relacionado con las zonas
-  zones: any[];
-  setZones: (zones: any[]) => void;
+  zones: Zone[];
+  setZones: (zones: Zone[]) => void;
   zoneAndDistrictNames: Record<string, string>;
   setZoneAndDistrictNames: (
     zoneAndDistrictNames: Record<string, string>
   ) => void;
-
+  selectedZone: string;
+  setSelectedZone: (zoneId: string) => void;
   // Estado y acciones relacionadas con la carga de la API de Google Maps
   isGoogleMapsApiLoaded: boolean;
   setIsGoogleMapsApiLoaded: (isLoaded: boolean) => void;
@@ -109,11 +111,12 @@ const useAppStore = create<AppState>((set) => ({
 
   // Asignar zonas
   zones: [],
-  setZones: (zones) => set({ zones }),
+  setZones: (zones: Zone[]) => set({ zones }),
   zoneAndDistrictNames: {},
   setZoneAndDistrictNames: (zoneAndDistrictNames) =>
     set({ zoneAndDistrictNames }),
-
+  selectedZone: "",
+  setSelectedZone: (zoneId: string) => set({ selectedZone: zoneId }),
   // Estado inicial y acciones relacionadas con la carga de la API de Google Maps
   isGoogleMapsApiLoaded: false,
   setIsGoogleMapsApiLoaded: (isLoaded: boolean) =>

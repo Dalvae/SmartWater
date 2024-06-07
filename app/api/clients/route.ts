@@ -1,34 +1,24 @@
-// app/api/clients/route.ts
-
 import { NextResponse } from "next/server";
-import { loadClients, saveClient } from "@/lib/services/ClientsService";
 
-export async function GET() {
-  try {
-    const clients = await loadClients();
-    return NextResponse.json(clients);
-  } catch (error) {
-    console.error("Error loading clients:", error);
+export async function GET(request: Request) {
+  const authToken = process.env.SMARTWATER_API_AUTH_TOKEN;
+
+  if (!authToken) {
     return NextResponse.json(
-      { error: "Internal Server Error" },
+      { error: "Missing API authorization token" },
       { status: 500 }
     );
   }
-}
 
-export async function POST(request: Request) {
-  try {
-    const client = await request.json();
-    await saveClient(client);
-    return NextResponse.json(
-      { message: "Client created successfully" },
-      { status: 201 }
-    );
-  } catch (error) {
-    console.error("Error saving client:", error);
-    return NextResponse.json(
-      { error: "Internal Server Error" },
-      { status: 500 }
-    );
-  }
+  const response = await fetch(
+    `${process.env.SMARTWATER_API_BASE_URL}/clients`,
+    {
+      headers: {
+        Authorization: authToken,
+      },
+    }
+  );
+
+  const data = await response.json();
+  return NextResponse.json(data);
 }

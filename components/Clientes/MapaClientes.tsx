@@ -1,9 +1,9 @@
 // components/Clientes/MapaClientes.tsx
-"use client"
+"use client";
 
 import React, { useEffect, useState } from "react";
 import { Map, Marker } from "@vis.gl/react-google-maps";
-import { Client } from "@/type/Cliente/Client";
+import { Client } from "@/types/Cliente/Client";
 import useAppStore from "@/store/appStore";
 import ClienteInfo from "../ui/ClienteInfo";
 

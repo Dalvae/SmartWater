@@ -1,0 +1,50 @@
+export interface Client {
+  _id: string;
+  code: string;
+  user: string;
+  storeImage: string;
+  fullName: string;
+  phoneNumber: string;
+  address: string;
+  comment: string;
+  email: string;
+  ciFrontImage: string;
+  ciBackImage: string;
+  zone: string;
+  district: string;
+  location: {
+    latitude: string;
+    longitude: string;
+  };
+  hasOrder: boolean;
+  hasLoan: boolean;
+  hasContract: boolean;
+  renewInDays: number;
+  renewDate: string;
+  isClient: boolean;
+  isAgency: boolean;
+  billingInfo: {
+    NIT: string;
+    phoneNumber: string;
+  };
+  averageRenewal: boolean;
+  contracts: any[];
+  created: string;
+  updated: string;
+  lastSale: string;
+  hasExpiredContract: boolean;
+  credit: number;
+}
+
+export interface ClientResponse {
+  metadata: {
+    totalCount: number;
+    page: number;
+    pageSize: number;
+    previousPage: number | null;
+    nextPage: number | null;
+    year: number | null;
+    month: number | null;
+  };
+  data: Client[];
+}

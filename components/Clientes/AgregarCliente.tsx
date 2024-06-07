@@ -48,7 +48,6 @@ const AgregarCliente: React.FC<AgregarClienteProps> = ({ onClose }) => {
   useEffect(() => {
     loadZones();
   }, []);
-  // Cerrar y mostrar el modal
   useEffect(() => {
     const handleCloseOnEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape") {

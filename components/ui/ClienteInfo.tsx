@@ -1,7 +1,7 @@
 // Suponiendo que el archivo se llama ClienteInfo.tsx
 
 import React from "react";
-import { Client } from "@/type/Cliente/Client"; // Asegúrate de que esta importación es correcta
+import { Client } from "@/types/Cliente/Client"; // Asegúrate de que esta importación es correcta
 
 interface ClienteInfoProps {
   isOpen: boolean;

@@ -5,7 +5,7 @@ import { OpenIcon } from "../icons/Icons";
 import { Search } from "lucide-react";
 import { FiltrosClientes } from "./FiltrosClientes";
 import useAppStore from "@/store/appStore";
-import { Client } from "@/type/Cliente/Client";
+import { Client } from "@/types/Cliente/Client";
 
 interface SearchAndFilterHOCProps {
   children: React.ReactNode;

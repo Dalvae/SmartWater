@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import moment from "moment";
 import MapModal from "../ui/MapModal";
-import { Client } from "@/type/Cliente/Client";
+import { Client } from "@/types/Cliente/Client";
 import Image from "next/image";
 import {
   Phone,
@@ -18,6 +18,7 @@ import {
 import { OpenIcon } from "../icons/Icons";
 import * as Popover from "@radix-ui/react-popover";
 import ConfirmDelete from "../ui/ConfirmDelete";
+import { deleteClient } from "@/lib/services/ClientsService";
 
 interface ClientCardProps {
   client: Client;
@@ -58,9 +59,15 @@ export const ClientCard: React.FC<ClientCardProps> = ({
     alert("¡Hola!");
   };
 
-  const handleDelete = () => {
-    alert("¡nada por ahora!");
+  const handleDelete = async () => {
+    try {
+      await deleteClient(client._id);
+      // Suponiendo que tienes un método para actualizar la lista de clientes en tu estado local
+    } catch (error) {
+      console.error("Error al eliminar el cliente:", error);
+    }
   };
+
   return (
     <div className="border-gray-500 flex flex-col rounded-lg shadow-lg border">
       <div className="client-details flex flex-row items-center space-x-4 m-4">

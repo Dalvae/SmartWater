@@ -1,5 +1,5 @@
 // ClientesPaginados.tsx
-"use client"
+"use client";
 import React, { useState } from "react";
 import { Download, Plus, ChevronDown } from "lucide-react";
 import { saveAs } from "file-saver";
@@ -7,6 +7,7 @@ import * as XLSX from "xlsx";
 import ClientCard from "./ClientCard";
 import useAppStore from "@/store/appStore";
 import AgregarCliente from "./AgregarCliente";
+import { AgregarCliente2 } from "./AddClient";
 
 interface ClientesPaginadosProps {
   zoneAndDistrictNames: Record<string, string>;
@@ -36,13 +37,18 @@ export const ClientesPaginados: React.FC<ClientesPaginadosProps> = ({
   const handleSortOrderChange = () => {
     const newSortOrder = sortOrder === "asc" ? "desc" : "asc";
     setSortOrder(newSortOrder);
-}
+  };
 
-    const sortedCurrentData = sortOrder === "asc"
-  ? currentData.sort((a, b) => new Date(a.created).getTime() - new Date(b.created).getTime())
-  : currentData.sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime());
-
-
+  const sortedCurrentData =
+    sortOrder === "asc"
+      ? currentData.sort(
+          (a, b) =>
+            new Date(a.created).getTime() - new Date(b.created).getTime()
+        )
+      : currentData.sort(
+          (a, b) =>
+            new Date(b.created).getTime() - new Date(a.created).getTime()
+        );
 
   const exportToExcel = () => {
     // TODO: Darle formato a los datos y dejar los importantes
@@ -58,7 +64,7 @@ export const ClientesPaginados: React.FC<ClientesPaginadosProps> = ({
     });
     saveAs(data, "clientes.xlsx");
   };
-  
+
   const handleOpenModal = () => setShowModal(true); // Función para abrir el modal
   const handleCloseModal = () => setShowModal(false); // Función para cerrar el modal
 
@@ -126,7 +132,7 @@ export const ClientesPaginados: React.FC<ClientesPaginadosProps> = ({
       </div>
 
       <div className="grid shadow-md rounded-lg grid-cols-1 sm:grid-cols-2 gap-4">
-      {sortedCurrentData.map((client) => (
+        {sortedCurrentData.map((client) => (
           <ClientCard
             key={client._id}
             client={client}
@@ -142,17 +148,16 @@ export const ClientesPaginados: React.FC<ClientesPaginadosProps> = ({
           <Download />
           Exportar
         </button>
-        <button 
-          className="bg-blue-800 text-white rounded-full p-4 w-24 h-24 flex flex-col items-center justify-center" 
+        <AgregarCliente2 />
+        <button
+          className="bg-blue-800 text-white rounded-full p-4 w-24 h-24 flex flex-col items-center justify-center"
           onClick={handleOpenModal}
         >
           <Plus />
           Agregar
         </button>
       </div>
-      {showModal && (
-        <AgregarCliente onClose={handleCloseModal} />
-      )}
+      {showModal && <AgregarCliente onClose={handleCloseModal} />}
     </div>
   );
 };
