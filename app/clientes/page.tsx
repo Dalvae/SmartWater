@@ -1,7 +1,7 @@
 // app/clientes/page.tsx
 import { PageTitle } from "@/components/ui/PageTitle";
 import { ClientesIcon } from "@/components/icons/Icons";
-import { useZones } from "@/hooks/useZones";
+import { fetchZones } from "@/hooks/fetchZones";
 import useAppStore from "@/store/appStore";
 import smartwaterApi from "@/lib/SmartWaterApi";
 import { ClientResponse } from "@/types/Cliente/Client";
@@ -10,7 +10,7 @@ import { ClientesPaginados } from "@/components/Clientes/ClientesPaginados";
 import { Zone } from "@/types/Zones/Zones";
 
 export default async function Clientes() {
-  const zones: Zone[] = await useZones();
+  const zones: Zone[] = await fetchZones();
   const zoneAndDistrictNames: Record<string, string> = zones.reduce(
     (acc, zone) => {
       acc[zone._id] = zone.name;

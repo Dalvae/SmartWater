@@ -20,7 +20,7 @@ import {
   saveImage,
 } from "./api/addclient";
 import useAppStore from "@/store/appStore";
-import { useZones } from "@/hooks/useZones";
+import { fetchZones } from "@/hooks/fetchZones";
 import { Zone, District } from "../../types/Zones/Zones";
 
 interface AgregarClienteProps {
@@ -45,7 +45,7 @@ export const AgregarCliente2: React.FC = () => {
 
   useEffect(() => {
     const fetchZones = async () => {
-      const zones = await useZones();
+      const zones = await fetchZones();
       setZones(zones);
     };
 

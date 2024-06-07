@@ -1,8 +1,8 @@
 // app/actions/setZones.ts
-import { useZones } from "@/hooks/useZones";
+import { fetchZones } from "@/hooks/fetchZones";
 import useAppStore from "@/store/appStore";
 
 export default async function setZones() {
-  const zones = await useZones();
+  const zones = await fetchZones();
   useAppStore.getState().setZones(zones);
 }

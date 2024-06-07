@@ -14,7 +14,7 @@ interface Zone {
   districts: District[];
 }
 
-export const useZones = async (): Promise<Zone[]> => {
+export const fetchZones = async (): Promise<Zone[]> => {
   try {
     const response = await smartwaterApi.get("/zones?pageSize=3000");
     const data = response.data;
