@@ -15,7 +15,7 @@ type SelectFieldProps = FieldWrapperPassThroughProps & {
   className?: string;
   defaultValue?: string;
   registration: Partial<UseFormRegisterReturn>;
-  onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void; // Agrega la propiedad onChange
+  onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 };
 
 export const Select = React.forwardRef<HTMLSelectElement, SelectFieldProps>(
@@ -51,3 +51,4 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectFieldProps>(
     );
   }
 );
+Select.displayName = "Select";
