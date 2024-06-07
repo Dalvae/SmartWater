@@ -1,18 +1,8 @@
-// app/hooks/useZones.ts
+// app/hooks/fetchZones.ts
 "use server";
 import smartwaterApi from "@/lib/SmartWaterApi";
 import useAppStore from "@/store/appStore";
-
-interface District {
-  _id: string;
-  name: string;
-}
-
-interface Zone {
-  _id: string;
-  name: string;
-  districts: District[];
-}
+import { Zone } from "@/types/Zones/Zones";
 
 export const fetchZones = async (): Promise<Zone[]> => {
   try {
