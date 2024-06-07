@@ -55,6 +55,7 @@ export const AgregarCliente2: React.FC = () => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<AddClientInput>({
     resolver: zodResolver(addClientInputSchema),
@@ -137,6 +138,7 @@ export const AgregarCliente2: React.FC = () => {
       setIsLoading(false);
     }
   };
+
   const handleZoneChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedZoneId = event.target.value;
     console.log("Selected Zone ID:", selectedZoneId);
@@ -298,6 +300,7 @@ export const AgregarCliente2: React.FC = () => {
                           placeholder="70918627"
                           id="phoneNumber"
                           {...register("phoneNumber")}
+                          handlezo
                         />
                       </div>
                     </div>
