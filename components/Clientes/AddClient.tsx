@@ -85,17 +85,22 @@ export const AgregarCliente2: React.FC = () => {
     }
   };
 
-  const handleImageChange = (
+  const handleImageChange = async (
     e: React.ChangeEvent<HTMLInputElement>,
     setImage: (value: string | null) => void
   ) => {
     const file = e.target.files?.[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setImage(reader.result as string);
-      };
-      reader.readAsDataURL(file);
+      try {
+        const response = await saveImage(file);
+        setImage(response.secure_url);
+      } catch (error) {
+        console.error("Error saving image:", error);
+        addNotification({
+          type: "error",
+          title: "Error al guardar la imagen",
+        });
+      }
     }
   };
 
@@ -355,7 +360,7 @@ export const AgregarCliente2: React.FC = () => {
                       </Label>
                       <Select
                         className="w-full border border-black rounded-md px-4 py-2 text-center text-sm"
-                        id="zone"
+                        label="zone"
                         {...register("zone")}
                         onChange={handleZoneChange}
                         options={zones.map((zone) => ({
@@ -375,7 +380,7 @@ export const AgregarCliente2: React.FC = () => {
                       </Label>
                       <Select
                         className="w-full border border-black rounded-md px-4 py-2 text-center text-sm"
-                        id="district"
+                        label="district"
                         {...register("district")}
                         options={filteredDistricts.map((district) => ({
                           label: district.name,

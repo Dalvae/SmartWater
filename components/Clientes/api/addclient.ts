@@ -42,33 +42,14 @@ export const addClientInputSchema = z
 export type AddClientInput = z.infer<typeof addClientInputSchema>;
 
 export const addClient = async (data: AddClientInput) => {
-  let frontCarnetImage: File | undefined;
-  let backCarnetImage: File | undefined;
-
-  if (data.ciFrontImage && data.ciBackImage) {
-    frontCarnetImage = await convertUrlToFile(
-      data.ciFrontImage,
-      `${data.fullName}-carnetDelantero.jpg`
-    );
-    backCarnetImage = await convertUrlToFile(
-      data.ciBackImage,
-      `${data.fullName}-carnetTrasero.jpg`
-    );
-  } else {
-    throw new Error("No se encontraron imágenes del carnet");
-  }
-
+  const storeImage = data.storeImage;
+  const frontCarnetImage = data.ciFrontImage;
+  const backCarnetImage = data.ciBackImage;
   const coordinates = await getCoordinates(data.address);
-  const storeImageUrl = await saveImage(data.storeImage);
-  const frontCarnetImageUrl = await saveImage(frontCarnetImage);
-  const backCarnetImageUrl = await saveImage(backCarnetImage);
 
   const clientData = {
     ...data,
     location: coordinates,
-    storeImage: storeImageUrl.secure_url,
-    ciFrontImage: frontCarnetImageUrl.secure_url,
-    ciBackImage: backCarnetImageUrl.secure_url,
   };
 
   const response = await fetch("/api/clients/register", {
@@ -117,8 +98,11 @@ export const saveImage = async (file: File) => {
     }
   );
 
-  const responseData = await response.json();
-  return responseData;
+  if (!response.ok) {
+    throw new Error("Error al subir la imagen a Cloudinary");
+  }
+
+  return response.json();
 };
 
 const convertUrlToFile = async (

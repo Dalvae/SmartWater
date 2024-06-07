@@ -12,7 +12,7 @@ type SelectFieldProps = FieldWrapperPassThroughProps & {
   options: Option[];
   className?: string;
   defaultValue?: string;
-  registration: Partial<UseFormRegisterReturn>;
+  registration?: Partial<UseFormRegisterReturn>;
   onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 };
 
