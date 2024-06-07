@@ -72,7 +72,7 @@ export const AgregarCliente2: React.FC = () => {
     if (file) {
       try {
         const response = await saveImage(file);
-        setSelectedImage(response.url);
+        setSelectedImage(response.secure_url);
       } catch (error) {
         console.error("Error saving image:", error);
         addNotification({
@@ -111,10 +111,9 @@ export const AgregarCliente2: React.FC = () => {
         return;
       }
 
-      const storeImageUrl = await saveImage(selectedImage);
       const clientData = {
         ...data,
-        storeImage: storeImageUrl.secure_url,
+        storeImage: selectedImage,
         ciFrontImage: imageCarnetDelantero,
         ciBackImage: imageCarnetTrasero,
         ...(isClient !== undefined && { isClient }),
@@ -138,7 +137,6 @@ export const AgregarCliente2: React.FC = () => {
       setIsLoading(false);
     }
   };
-
   const handleZoneChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedZoneId = event.target.value;
     console.log("Selected Zone ID:", selectedZoneId);
