@@ -28,7 +28,6 @@ interface AgregarClienteProps {
 }
 export const AgregarCliente2: React.FC = () => {
   const setZones = useAppStore((state) => state.setZones);
-  const zones = useAppStore((state) => state.zones);
   const [filteredDistricts, setFilteredDistricts] = useState<District[]>([]);
   const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -43,14 +42,14 @@ export const AgregarCliente2: React.FC = () => {
   const [isClient, setIsClient] = useState(false);
   const [isAgency, setIsAgency] = useState(false);
 
-  useEffect(() => {
-    const fetchZonesData = async () => {
-      const zones = await fetchZones();
-      setZones(zones);
-    };
+  const { zones } = useAppStore();
 
-    fetchZonesData();
-  }, [setZones]);
+  useEffect(() => {
+    const initializeZones = async () => {
+      await setZones();
+    };
+    initializeZones();
+  }, []);
 
   const {
     register,
